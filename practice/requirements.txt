@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+jinja2
+tortoise-orm
+aiosqlite
+python-multipart
+pandas
+matplotlib

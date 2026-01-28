@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}리포트 | 건강관리{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>주간 수분 리포트</h1>
+    <p class="muted">pandas + matplotlib 실습용 예시입니다.</p>
+  </div>
+  <div class="card">
+    <div class="list">
+      <div class="list-item">
+        <span>총 섭취량</span>
+        <strong>{{ total_water }} ml</strong>
+      </div>
+      <div class="list-item">
+        <span>기록 일수</span>
+        <strong>{{ days }} 일</strong>
+      </div>
+      <div class="list-item">
+        <span>일평균</span>
+        <strong>{{ avg_per_day }} ml</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>일별 수분 섭취량</h2>
+    <span class="chip">자동 생성</span>
+  </div>
+  <div class="chart-wrap">
+    <img src="{{ chart_url }}" alt="수분 리포트 차트" />
+  </div>
+</section>
+{% endblock %}

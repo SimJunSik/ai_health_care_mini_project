@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}개인 건강관리{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">HD</span>
+        <div>
+          <div class="brand-title">Health Deep</div>
+          <div class="brand-sub">개인 건강관리</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="/">대시보드</a>
+        <a href="/water">수분</a>
+        <a href="/exercise">운동</a>
+        <a href="/sleep">수면</a>
+        <a href="/meal">식사</a>
+        <a href="/report">리포트</a>
+      </nav>
+      <div class="chip">v1.0</div>
+    </header>
+
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+      <span>FastAPI · Jinja · Tortoise · SQLite</span>
+      <span>Built for class labs</span>
+    </footer>
+  </body>
+</html>

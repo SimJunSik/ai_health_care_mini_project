@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}대시보드 | 건강관리{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>안녕하세요, {{ user.name }}님</h1>
+    <p class="muted">오늘의 건강 기록을 빠르게 확인하세요.</p>
+  </div>
+  <div class="hero-card">
+    <div class="hero-metric">
+      <span>총 수분</span>
+      <strong>{{ total_water }} ml</strong>
+    </div>
+    <div class="hero-metric">
+      <span>총 운동</span>
+      <strong>{{ total_exercise }} 분</strong>
+    </div>
+  </div>
+</section>
+
+<section class="grid">
+  <div class="card">
+    <div class="card-header">
+      <h2>최근 수분</h2>
+      <a class="link" href="/water">전체 보기</a>
+    </div>
+    <ul class="list">
+      {% for log in water_logs %}
+      <li>
+        <span>{{ log.logged_at.strftime("%m/%d %H:%M") }}</span>
+        <strong>{{ log.amount_ml }} ml</strong>
+      </li>
+      {% else %}
+      <li class="muted">기록이 없습니다.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>최근 운동</h2>
+      <a class="link" href="/exercise">전체 보기</a>
+    </div>
+    <ul class="list">
+      {% for log in exercise_logs %}
+      <li>
+        <span>{{ log.activity }}</span>
+        <strong>{{ log.duration_min }} 분</strong>
+      </li>
+      {% else %}
+      <li class="muted">기록이 없습니다.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>최근 수면</h2>
+      <a class="link" href="/sleep">전체 보기</a>
+    </div>
+    <ul class="list">
+      {% for log in sleep_logs %}
+      <li>
+        <span>{{ log.sleep_date }}</span>
+        <strong>품질 {{ log.quality or "-" }}</strong>
+      </li>
+      {% else %}
+      <li class="muted">기록이 없습니다.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>최근 식사</h2>
+      <a class="link" href="/meal">전체 보기</a>
+    </div>
+    <ul class="list">
+      {% for log in meal_logs %}
+      <li>
+        <span>{{ log.meal_type }}</span>
+        <strong>{{ log.calories or "-" }} kcal</strong>
+      </li>
+      {% else %}
+      <li class="muted">기록이 없습니다.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}운동 | 건강관리{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>운동 기록</h1>
+    <p class="muted">운동 시간과 칼로리를 관리하세요.</p>
+  </div>
+  <form class="form" method="post">
+    <label>
+      운동 종류
+      <input type="text" name="activity" required />
+    </label>
+    <label>
+      시간(분)
+      <input type="number" name="duration_min" min="1" required />
+    </label>
+    <label>
+      칼로리(kcal)
+      <input type="number" name="calories_burned" min="0" />
+    </label>
+    <button type="submit">기록 추가</button>
+  </form>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>기록 목록</h2>
+    <span class="chip">총 {{ logs|length }} 건</span>
+  </div>
+  <ul class="list">
+    {% for log in logs %}
+    <li>
+      <span>{{ log.activity }} · {{ log.logged_at.strftime("%m/%d") }}</span>
+      <strong>{{ log.duration_min }} 분</strong>
+    </li>
+    {% else %}
+    <li class="muted">아직 기록이 없습니다.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

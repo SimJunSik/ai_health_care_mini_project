@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}식사 | 건강관리{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>식사 기록</h1>
+    <p class="muted">실습 구간: ORM 모델과 API로 교체하세요.</p>
+  </div>
+  <form class="form" method="post">
+    <label>
+      식사 종류
+      <select name="meal_type" required>
+        <option value="아침">아침</option>
+        <option value="점심">점심</option>
+        <option value="저녁">저녁</option>
+        <option value="간식">간식</option>
+      </select>
+    </label>
+    <label>
+      칼로리(kcal)
+      <input type="number" name="calories" min="0" />
+    </label>
+    <label>
+      메모
+      <input type="text" name="note" />
+    </label>
+    <button type="submit">기록 추가</button>
+  </form>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>기록 목록</h2>
+    <span class="chip">총 {{ logs|length }} 건</span>
+  </div>
+  <ul class="list">
+    {% for log in logs %}
+    <li>
+      <span>{{ log.meal_type }} · {{ log.eaten_at.strftime("%m/%d %H:%M") }}</span>
+      <strong>{{ log.calories or "-" }} kcal</strong>
+    </li>
+    {% else %}
+    <li class="muted">아직 기록이 없습니다.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

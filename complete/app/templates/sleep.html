@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}수면 | 건강관리{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>수면 기록</h1>
+    <p class="muted">취침/기상 시간을 기록하세요.</p>
+  </div>
+  <form class="form" method="post">
+    <label>
+      수면 날짜
+      <input type="date" name="sleep_date" required />
+    </label>
+    <label>
+      취침 시간
+      <input type="datetime-local" name="start_time" required />
+    </label>
+    <label>
+      기상 시간
+      <input type="datetime-local" name="end_time" required />
+    </label>
+    <label>
+      수면 품질(1~5)
+      <input type="number" name="quality" min="1" max="5" />
+    </label>
+    <button type="submit">기록 추가</button>
+  </form>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>기록 목록</h2>
+    <span class="chip">총 {{ logs|length }} 건</span>
+  </div>
+  <ul class="list">
+    {% for log in logs %}
+    <li>
+      <span>{{ log.sleep_date }} · {{ log.start_time.strftime("%H:%M") }} ~ {{ log.end_time.strftime("%H:%M") }}</span>
+      <strong>품질 {{ log.quality or "-" }}</strong>
+    </li>
+    {% else %}
+    <li class="muted">아직 기록이 없습니다.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

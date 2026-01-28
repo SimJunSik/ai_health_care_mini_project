@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}수분 | 건강관리{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <h1>수분 기록</h1>
+    <p class="muted">이 페이지는 ORM까지 완성된 예시입니다.</p>
+  </div>
+  <form class="form" method="post">
+    <label>
+      섭취량(ml)
+      <input type="number" name="amount_ml" min="50" required />
+    </label>
+    <button type="submit">기록 추가</button>
+  </form>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>기록 목록</h2>
+    <span class="chip">총 {{ logs|length }} 건</span>
+  </div>
+  <ul class="list">
+    {% for log in logs %}
+    <li>
+      <span>{{ log.logged_at.strftime("%Y-%m-%d %H:%M") }}</span>
+      <strong>{{ log.amount_ml }} ml</strong>
+    </li>
+    {% else %}
+    <li class="muted">아직 기록이 없습니다.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}
